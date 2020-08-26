@@ -1,4 +1,7 @@
 # resize
-Quick image resizer using nearest neighbor. Made for smart album cover.
+This resizes an image using a custom algorithm. Built for the [smart album cover display](https://github.com/phultquist/smart-album-cover)
 
-Note: not done yet. May reconsider resize algorithm. Specifically having issues with Young Dumb and Broke as well as XXX's ?
+## Algorithm
+Splits up the image in to a grid of 16 pixels (easy to change of course), and averages the red, green, and blue values of that region. 
+
+### Then, it boosts the contrast as averaging pixels genearally dullens the image. [here's the math](https://www.desmos.com/calculator/tgyqoeflza) behind that part
