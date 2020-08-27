@@ -100,6 +100,6 @@ def get_new_pixels(pix):
         resized.append(newrow)
         x += stepsize
 
-    resizedimg = PIL.Image.fromarray(np.array(resized))
-    resizedimg.show()
+    # resizedimg = PIL.Image.fromarray(np.array(resized))
+    # resizedimg.show()
     return np.array(resized)
