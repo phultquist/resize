@@ -5,29 +5,33 @@ import requests
 
 
 #ydb
-src = 'https://i.scdn.co/image/ab67616d00004851988ede5e1276e758b5f9e577'
+# url = 'https://i.scdn.co/image/ab67616d00004851988ede5e1276e758b5f9e577'
 
 #graduation
-src = 'resize/test.png'
+url = 'resize/test.png'
 
 #xxx album
-# src = 'https://i.scdn.co/image/ab67616d00004851806c160566580d6335d1f16c'
+# url = 'https://i.scdn.co/image/ab67616d00004851806c160566580d6335d1f16c'
 
 # #mbdtf
-# src = 'https://i.scdn.co/image/ab67616d00004851d9194aa18fa4c9362b47464f'
-content = src
-if src.startswith('http'):
-    imgresp = requests.get(src)
-    content = BytesIO(imgresp.content)
-img = PIL.Image.open(content)
-img.convert('RGB')
-pix = np.array(img)
-width, height = img.size
-stepsize = int(width / 16)
+# url = 'https://i.scdn.co/image/ab67616d00004851d9194aa18fa4c9362b47464f'
+width, height, stepsize = (0,0,0)
+
+def resize(src):
+    global width, height, stepsize
+    content = src
+    if src.startswith('http'):
+        imgresp = requests.get(src)
+        content = BytesIO(imgresp.content)
+    img = PIL.Image.open(content)
+    img.convert('RGB')
+    pix = np.array(img)
+    width, height = img.size
+    stepsize = int(width / 16)
+    get_new_pixels(pix)
 
 
 def generalize(pixels, type):
-
     # transpose data to get array of reds, blues, greens
     reds = []
     greens = []
@@ -78,36 +82,34 @@ def contrast(o):
     elif o > m/2:
         return ((m/2) * ((2*(o-m/2)/m) ** g2) + m/2)
 
+def get_new_pixels(pix):
+    x = 0
+    resized = []
+    while x < height:
+        y = 0
+        newrow = []
+        while y < width:
+            # print('x', x, '   y', y)
+            toGeneralize = []
+            a = 0
+            b = 0
+            for a in range(4):
+                for b in range(4):
+                    toGeneralize.append(pix[x+a][y+b])
 
-x = 0
-resized = []
-while x < height:
-    y = 0
-    newrow = []
-    while y < width:
-        # print('x', x, '   y', y)
-        toGeneralize = []
-        a = 0
-        b = 0
-        for a in range(4):
-            for b in range(4):
-                toGeneralize.append(pix[x+a][y+b])
+            generated = generalize(toGeneralize, 'mean')
+            # gend[3] = np.uint8(255)
+            # print(generated)
+            newrow.append(generated)
+            y += stepsize
 
-        generated = generalize(toGeneralize, 'mean')
-        # gend[3] = np.uint8(255)
-        # print(generated)
-        newrow.append(generated)
-        y += stepsize
+        # print('x', x, '   y', y, '   len', newrow)
+        resized.append(newrow)
+        x += stepsize
 
-    # print('x', x, '   y', y, '   len', newrow)
-    resized.append(newrow)
-    x += stepsize
+    im = PIL.Image.fromarray(np.array(resized))
+    im.show()
 
-im = PIL.Image.fromarray(np.array(resized))
-im.show()
-
-print(len(pix))
-print(len(pix[0]))
-print(len(pix[0][0]))
+resize(url)
 
 
