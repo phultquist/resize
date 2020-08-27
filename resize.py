@@ -2,27 +2,26 @@ import PIL.Image
 import numpy as np
 from io import BytesIO
 import requests
+import math
 
-
-#ydb
-# url = 'https://i.scdn.co/image/ab67616d00004851988ede5e1276e758b5f9e577'
-
-#graduation
-url = 'resize/test.png'
-
-#xxx album
-# url = 'https://i.scdn.co/image/ab67616d00004851806c160566580d6335d1f16c'
-
-# #mbdtf
-# url = 'https://i.scdn.co/image/ab67616d00004851d9194aa18fa4c9362b47464f'
 width, height, stepsize = (0,0,0)
 
+# content = src
+# if src.startswith('http'):
+#     imgresp = requests.get(src)
+#     content = BytesIO(imgresp.content)
+
+size = 16
+
 def resize(img):
+    global width, height, stepsize
     img.convert('RGB')
     pix = np.array(img)
     width, height = img.size
-    stepsize = int(width / 16)
-    get_new_pixels(pix)
+    # if width == size:
+    #     return pix
+    stepsize = int(width / size)
+    return get_new_pixels(pix)
 
 
 def generalize(pixels, type):
@@ -87,8 +86,8 @@ def get_new_pixels(pix):
             toGeneralize = []
             a = 0
             b = 0
-            for a in range(4):
-                for b in range(4):
+            for a in range(stepsize):
+                for b in range(stepsize):
                     toGeneralize.append(pix[x+a][y+b])
 
             generated = generalize(toGeneralize, 'mean')
@@ -101,9 +100,6 @@ def get_new_pixels(pix):
         resized.append(newrow)
         x += stepsize
 
-    im = PIL.Image.fromarray(np.array(resized))
-    im.show()
-
-resize(url)
-
-
+    resizedimg = PIL.Image.fromarray(np.array(resized))
+    resizedimg.show()
+    return np.array(resized)
