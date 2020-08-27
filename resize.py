@@ -21,7 +21,10 @@ def resize(img):
     # if width == size:
     #     return pix
     stepsize = int(width / size)
-    return get_new_pixels(pix)
+    try:
+        return get_new_pixels(pix)
+    except: 
+        return np.array(img.resize((16,16)))
 
 
 def generalize(pixels, type):
