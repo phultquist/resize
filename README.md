@@ -7,3 +7,10 @@ Splits up the image in to a grid of 16 pixels (easy to change of course), and av
 ### Then, it boosts the contrast as averaging pixels genearally dullens the image. [here's the math](https://www.desmos.com/calculator/krkquoynov) behind that part
 
 Basically, the goal is to make the high values higher and the low values lower.
+
+## Note
+1. This assumes that 
+    a) the initial image is a square
+    b) the desired image is a square
+
+    Honestly, this is really easy to change. But to keep it strict for album covers, I'd like to keep it this way. Perhaps I'll update it in the future.
