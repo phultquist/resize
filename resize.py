@@ -17,13 +17,7 @@ url = 'resize/test.png'
 # url = 'https://i.scdn.co/image/ab67616d00004851d9194aa18fa4c9362b47464f'
 width, height, stepsize = (0,0,0)
 
-def resize(src):
-    global width, height, stepsize
-    content = src
-    if src.startswith('http'):
-        imgresp = requests.get(src)
-        content = BytesIO(imgresp.content)
-    img = PIL.Image.open(content)
+def resize(img):
     img.convert('RGB')
     pix = np.array(img)
     width, height = img.size
