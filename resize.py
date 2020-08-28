@@ -63,12 +63,11 @@ def generalize(pixels, type):
             totals[k] = 255
         elif totals[k] < 0:
             totals[k] = 0
-        totals[k] = np.uint8(contrast(totals[k]))
+        totals[k] = np.uint8(contrast(totals[k], 1.1))
     return totals
 
-def contrast(o):
+def contrast(o, g):
     m = 255
-    g = 1.1
 
     if o == 0 or o == 255 or o == m/2:
         return o
