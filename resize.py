@@ -13,13 +13,13 @@ width, height, stepsize = (0,0,0)
 contrast_gamma = 1.1
 size = 16
 
-def resize(img):
-    global width, height, stepsize
+def resize(img, g):
+    global width, height, stepsize, contrast_gamma
+    contrast_gamma = g
     img.convert('RGB')
     pix = np.array(img)
     width, height = img.size
-    # if width == size:
-    #     return pix
+    
     stepsize = int(width / size)
     try:
         return get_new_pixels(pix)
@@ -93,12 +93,10 @@ def get_new_pixels(pix):
                     toGeneralize.append(pix[x+a][y+b])
 
             generated = generalize(toGeneralize, 'mean')
-            # gend[3] = np.uint8(255)
-            # print(generated)
+
             newrow.append(generated)
             y += stepsize
 
-        # print('x', x, '   y', y, '   len', newrow)
         resized.append(newrow)
         x += stepsize
 
