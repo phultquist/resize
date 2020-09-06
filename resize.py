@@ -10,7 +10,7 @@ width, height, stepsize = (0,0,0)
 # if src.startswith('http'):
 #     imgresp = requests.get(src)
 #     content = BytesIO(imgresp.content)
-
+contrast_gamma = 1.1
 size = 16
 
 def resize(img):
@@ -63,7 +63,7 @@ def generalize(pixels, type):
             totals[k] = 255
         elif totals[k] < 0:
             totals[k] = 0
-        totals[k] = np.uint8(contrast(totals[k], 1.1))
+        totals[k] = np.uint8(contrast(totals[k], contrast_gamma))
     return totals
 
 def contrast(o, g):
