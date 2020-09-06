@@ -16,6 +16,7 @@ size = 16
 def resize(img, g):
     global width, height, stepsize, contrast_gamma
     contrast_gamma = g
+    print(contrast_gamma)
     img.convert('RGB')
     pix = np.array(img)
     width, height = img.size
