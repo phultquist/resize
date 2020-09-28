@@ -78,7 +78,7 @@ def contrast(o, g):
         #return -1 * ((m/2) * ((2*(-1*o+m/2)/m) ** g2) - m/2)
     #elif o > m/2:
         #return ((m/2) * ((2*(o-m/2)/m) ** g2) + m/2)
-    return (((-0.5) * numpy.tanh(g2 * (o - 0.5)) / numpy.tanh(-g2 / 2)) + 0.5)
+    return m*(((-0.5) * numpy.tanh(g2 * (o/m - 0.5)) / numpy.tanh(-g2 / 2)) + 0.5)
         
 def get_new_pixels(pix):
     x = 0
