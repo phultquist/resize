@@ -72,7 +72,7 @@ def contrast(o, g):
 
     #if o == 0 or o == 255 or o == m/2:
         #return o
-    g2 = (g-0.5)*5
+    g2 = (g-0.5)*50
     print (g2)
     #if o < m/2:
         #return -1 * ((m/2) * ((2*(-1*o+m/2)/m) ** g2) - m/2)
