@@ -70,15 +70,15 @@ def generalize(pixels, type):
 def contrast(o, g):
     m = 255
 
-    #if o == 0 or o == 255 or o == m/2:
-        #return o
-    g2 = (g-0.5)*50
+    if o == 0 or o == 255 or o == m/2:
+        return o
+    g2 = (g-0.5)*5
     print (g2)
-    #if o < m/2:
-        #return -1 * ((m/2) * ((2*(-1*o+m/2)/m) ** g2) - m/2)
-    #elif o > m/2:
-        #return ((m/2) * ((2*(o-m/2)/m) ** g2) + m/2)
-    return m*(((-0.5) * numpy.tanh(g2 * (o/m - 0.5)) / numpy.tanh(-g2 / 2)) + 0.5)
+    if o < m/2:
+        return m * ((2 * o / m) ** g2) / 2
+    elif o > m/2:
+        return m * (-1 * ((-2 * o) / m + 2) ** g2 + 2) / 2
+    #return m*(((-0.5) * numpy.tanh(g2 * (o/m - 0.5)) / numpy.tanh(-g2 / 2)) + 0.5)
         
 def get_new_pixels(pix):
     x = 0
