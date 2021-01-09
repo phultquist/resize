@@ -1,12 +1,15 @@
 # resize
-This resizes an image using a custom algorithm. Built for the [smart album cover display](https://github.com/phultquist/smart-album-cover)
+This resizes an image using a custom algorithm. Built for the Frame, the smart album cover display.
 
 ## Algorithm
-Splits up the image in to a grid of 16 pixels (easy to change of course), and averages the red, green, and blue values of that region. 
+Splits up the image in to a grid of 16 pixels (adjustable of course), and averages the red, green, and blue values of that region. 
 
-### Then, it boosts the contrast as averaging pixels dulls the image. [Here's the math](https://www.desmos.com/calculator/rkdaypwhdy) behind that part.
+**Then, it boosts the contrast as averaging pixels dulls the image. [Here's the math](https://www.desmos.com/calculator/rkdaypwhdy) behind that part.** Basically, this makes the image overall brighter and more fun. 
 
-Basically, the goal is to make the high values higher and the low values lower.
+In essence, this is a weighted average.
+
+## Why didn't we use existing software?
+The existing software often didn't deal with sharp edges too well, and would produce dull images.
 
 ## Note
 1. This assumes that 
