@@ -13,6 +13,6 @@ The existing software often didn't deal with sharp edges too well, and would pro
 
 ## Note
 1. This assumes that 
-    a) the initial image is a square
-    b) the desired image is a square
+    1. the initial image is a square
+    2. the desired image is a square
 2. **This is not very robust.** It might not work perfectly for odd image types. However, it works for its purpose. In the future I'll update it to be a useful general tool.
