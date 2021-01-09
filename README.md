@@ -15,6 +15,4 @@ The existing software often didn't deal with sharp edges too well, and would pro
 1. This assumes that 
     a) the initial image is a square
     b) the desired image is a square
-
-    Honestly, this is really easy to change. But to keep it strict for album covers, I'd like to keep it this way. Perhaps I'll update it in the future.
 2. **This is not very robust.** It might not work perfectly for odd image types. However, it works for its purpose. In the future I'll update it to be a useful general tool.
